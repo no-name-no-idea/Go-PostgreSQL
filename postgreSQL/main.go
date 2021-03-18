@@ -17,6 +17,7 @@ const (
 )
 
 func main() {
+	// connection string
 	psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
 
 	// open database
@@ -29,6 +30,11 @@ func main() {
 	// check db
 	err = db.Ping()
 	CheckError(err)
+
+	//insert
+	insertStmt := `insert into ideas ("id","name", "idea") values (0, 'no-name', 'no-idea')`
+	_, e := db.Exec(insertStmt)
+	CheckError(e)
 
 	fmt.Println("Connected!")
 }
