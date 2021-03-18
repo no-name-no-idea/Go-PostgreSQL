@@ -36,6 +36,11 @@ func main() {
 	_, e := db.Exec(insertStmt)
 	CheckError(e)
 
+	// dynamic insert
+	insertDynStmt := `insert into idea ("id","name", "idea") values($1, $2, $3)`
+	_, e = db.Exec(insertDynStmt, 1, "no-name", "no-idea")
+	CheckError(e)
+
 	fmt.Println("Connected!")
 }
 
