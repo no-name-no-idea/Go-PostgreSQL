@@ -51,7 +51,22 @@ func main() {
 	_, e = db.Exec(deleteStmt, 0)
 	CheckError(e)
 
-	fmt.Println("Connected!")
+	// select
+	selectStmt := `select * from idea`
+	rows, e := db.Query(selectStmt)
+	CheckError(e)
+
+	defer rows.Close()
+	for rows.Next() {
+		var id int
+		var name string
+		var idea string
+
+		err = rows.Scan(&id, &name, &idea)
+		CheckError(err)
+
+		fmt.Println(id, name, idea)
+	}
 }
 
 func CheckError(err error) {
