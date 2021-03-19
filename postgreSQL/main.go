@@ -41,6 +41,16 @@ func main() {
 	_, e = db.Exec(insertDynStmt, 1, "no-name", "no-idea")
 	CheckError(e)
 
+	// update
+	updateStmt := `update idea set "name" = $1, "idea" = $2 where "id" = $3`
+	_, e = db.Exec(updateStmt, "Med", "hum....", 0)
+	CheckError(e)
+
+	// delete
+	deleteStmt := `delete from idea where id = $1`
+	_, e = db.Exec(deleteStmt, 0)
+	CheckError(e)
+
 	fmt.Println("Connected!")
 }
 
