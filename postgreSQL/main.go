@@ -31,7 +31,7 @@ func main() {
 	err = db.Ping()
 	CheckError(err)
 
-	//insert
+	// insert
 	insertStmt := `insert into ideas ("id","name", "idea") values (0, 'no-name', 'no-idea')`
 	_, e := db.Exec(insertStmt)
 	CheckError(e)
@@ -48,7 +48,7 @@ func main() {
 
 	// delete
 	deleteStmt := `delete from idea where id = $1`
-	_, e = db.Exec(deleteStmt, 0)
+	_, e = db.Exec(deleteStmt, 1)
 	CheckError(e)
 
 	// select
