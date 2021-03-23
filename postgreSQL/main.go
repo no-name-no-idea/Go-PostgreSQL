@@ -12,8 +12,8 @@ const (
 	host     = "localhost"
 	port     = 5432
 	user     = "postgres"
-	password = "1234"
-	dbname   = "cosmos"
+	password = "0000"
+	dbname   = "no_idea"
 )
 
 func main() {
