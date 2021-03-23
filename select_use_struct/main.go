@@ -33,8 +33,8 @@ func main() {
 
 func GetData(c *gin.Context) {
 
-	g_slice := User{}
-	g_data := make([]User, 0)
+	gSlice := User{}
+	gData := make([]User, 0)
 
 	// connection string
 	psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
@@ -59,8 +59,8 @@ func GetData(c *gin.Context) {
 
 	for rows.Next() {
 
-		err = rows.Scan(&g_slice.Id, &g_slice.Name, &g_slice.Idea)
-		g_data = append(g_data, g_slice)
+		err = rows.Scan(&gSlice.Id, &gSlice.Name, &gSlice.Idea)
+		gData = append(gData, gSlice)
 		CheckError(err)
 
 	}
@@ -68,7 +68,7 @@ func GetData(c *gin.Context) {
 	// response
 	c.JSON(http.StatusOK, gin.H{
 		"message": "ok",
-		"data":    g_data,
+		"data":    gData,
 	})
 }
 
