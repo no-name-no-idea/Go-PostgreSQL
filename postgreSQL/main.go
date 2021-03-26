@@ -1,35 +1,15 @@
 package main
 
 import (
-	"database/sql"
+	"db"
 	"fmt"
 
 	_ "github.com/lib/pq"
 )
 
-//database info
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "0000"
-	dbname   = "no_idea"
-)
-
 func main() {
-	// connection string
-	psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
 
-	// open database
-	db, err := sql.Open("postgres", psqlconn)
-	CheckError(err)
-
-	// close database
-	defer db.Close()
-
-	// check db
-	err = db.Ping()
-	CheckError(err)
+	db.Init()
 
 	// insert
 	insertStmt := `insert into ideas ("id","name", "idea") values (0, 'no-name', 'no-idea')`
@@ -62,7 +42,7 @@ func main() {
 		var name string
 		var idea string
 
-		err = rows.Scan(&id, &name, &idea)
+		err := rows.Scan(&id, &name, &idea)
 		CheckError(err)
 
 		fmt.Println(id, name, idea)
